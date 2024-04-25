@@ -1,20 +1,25 @@
 //UserList.jsx
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import LoadingIndicator from './LoadingIndicator'; // Import LoadingIndicator component
 import { fetchUsers } from '../actions/userActions';
+
 const UserList = () => {
     const dispatch = useDispatch();
-    const { filteredUsers, searchText } = useSelector((state) => state.user);
-    console.log("list of user ", filteredUsers);
-    //const { filteredUsers } = useSelector((state) => state.filteredUsers);
-    //console.log(" Use selector ",useSelector((state) => state.user.filteredUsers));
+    const { filteredUsers, searchText, loading } = useSelector((state) => state.user);
+
     useEffect(() => {
-        console.log("useeffect searchText: ", searchText);
+        // Fetch users when the component mounts or when searchText changes
         dispatch(fetchUsers(searchText));
     }, [dispatch, searchText]);
 
+    // Render loading indicator if data is loading
+    if (loading) {
+        return <LoadingIndicator />;
+    }
+
+    // Render user list if data is loaded
     return (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {filteredUsers.map((user) => (
@@ -24,8 +29,8 @@ const UserList = () => {
                 </div>
             ))}
         </div>
+    );
+};
 
-    )
-}
+export default UserList;
 
-export default UserList

@@ -1,7 +1,7 @@
 // userActions.js
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 export const UPDATE_SEARCH_TEXT = 'UPDATE_SEARCH_TEXT';
-
+export const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST';
 let timeoutId = null;
  
 const typingDelay = 500; // Adjust typing delay 
@@ -10,7 +10,9 @@ export const fetchUsers = (searchText) => {
     return async (dispatch) => {
         // Clear previous timeout
         clearTimeout(timeoutId);
-
+        dispatch({
+            type: FETCH_USER_REQUEST,
+        });
         // If searchText becomes empty, dispatch an empty result immediately
         if (!searchText) {
             dispatch({

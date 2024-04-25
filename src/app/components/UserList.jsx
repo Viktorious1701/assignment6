@@ -7,11 +7,11 @@ import { fetchUsers } from '../actions/userActions';
 const UserList = () => {
     const dispatch = useDispatch();
     const { filteredUsers, searchText } = useSelector((state) => state.user);
-    console.log(filteredUsers);
-    console.log("search text in userlist ", searchText);
+    console.log("list of user ", filteredUsers);
     //const { filteredUsers } = useSelector((state) => state.filteredUsers);
     //console.log(" Use selector ",useSelector((state) => state.user.filteredUsers));
     useEffect(() => {
+        console.log("useeffect searchText: ", searchText);
         dispatch(fetchUsers(searchText));
     }, [dispatch, searchText]);
 

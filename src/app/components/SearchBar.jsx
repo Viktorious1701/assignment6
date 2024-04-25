@@ -9,7 +9,6 @@ const SearchBar = () => {
 
   const handleSearch = (e) => {
     dispatch(updateSearchText(e.target.value));
-    console.log("searchText: ", e.target.value);
   };
   
   return (

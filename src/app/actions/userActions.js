@@ -3,7 +3,7 @@ export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 export const UPDATE_SEARCH_TEXT = 'UPDATE_SEARCH_TEXT';
 
 let timeoutId = null;
-let lastSearchText = ''; // Track the last searchText
+ 
 const typingDelay = 500; // Adjust typing delay 
 
 export const fetchUsers = (searchText) => {
@@ -20,17 +20,7 @@ export const fetchUsers = (searchText) => {
             return;
         }
 
-        // If searchText changes before the timeout triggers, cancel the previous API request
-        if (searchText !== lastSearchText) {
-            // Clear lastSearchText to prevent dispatching outdated results
-            lastSearchText = '';
-            dispatch({
-                type: FETCH_USER_SUCCESS,
-                payload: [],
-            });
-            return;
-        }
-
+        
         // Set a new timer, if user doesn't change the search text after the specified delay, then fetch the data
         timeoutId = setTimeout(async () => {
             try {
@@ -48,10 +38,8 @@ export const fetchUsers = (searchText) => {
                     type: FETCH_USER_SUCCESS,
                     payload: [],
                 });
-            } finally {
-                // Update lastSearchText after the API request completes
-                lastSearchText = searchText;
-            }
+            } 
+            
         }, typingDelay);
     };
 };

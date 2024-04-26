@@ -20,10 +20,13 @@ const UserList = () => {
     }
 
     // Render user list if data is loaded
+    if(filteredUsers.length === 0 && searchText.length > 0) {
+        return <div className="text-center text-gray-800">No users found</div>
+    }
     return (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
             {filteredUsers.map((user) => (
-                <div key={user.id} className="bg-gray-100 p-4 rounded-md shadow-md">
+                <div key={user.id} className="bg-gray-100 p-4 rounded-md shadow-md ">
                     <h2 className="text-xl font-bold mb-2">{user.name}</h2>
                     <p className="text-gray-700">{user.email}</p>
                 </div>

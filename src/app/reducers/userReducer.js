@@ -3,9 +3,9 @@ import { FETCH_USER_SUCCESS, UPDATE_SEARCH_TEXT, FETCH_USER_REQUEST } from '../a
 
 const initialState = {
     users: [],
+    filteredUsers: [], // [{id: 1, name: "Judy", email: " [email protected]" },...
     searchText: "",
     loading: false,
-    filteredUsers: [] // [{id: 1, name: "Judy", email: " [email protected]" },...
 };
 const userReducer = (state= initialState, action) => {
     switch(action.type){

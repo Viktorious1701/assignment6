@@ -1,20 +1,11 @@
 //UserList.jsx
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import LoadingIndicator from './LoadingIndicator'; // Import LoadingIndicator component
-import { fetchUsers } from '../actions/userActions';
 
 const UserList = () => {
-    const dispatch = useDispatch();
     const { filteredUsers, searchText, loading } = useSelector((state) => state.user);
-
-    useEffect(() => {
-        // Fetch users when the component mounts or when searchText changes
-        console.log("dispatch useEffect")
-        dispatch(fetchUsers(searchText));
-
-    }, [dispatch, searchText]);
 
     // Render loading indicator if data is loading
     if (loading) {
